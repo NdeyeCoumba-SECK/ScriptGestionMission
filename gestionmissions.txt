@@ -1,0 +1,313 @@
+﻿-- phpMyAdmin SQL Dump
+-- version 4.1.14
+-- http://www.phpmyadmin.net
+--
+-- Client :  127.0.0.1
+-- Généré le :  Lun 19 Décembre 2016 à 16:05
+-- Version du serveur :  5.6.17
+-- Version de PHP :  5.5.12
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+--
+-- Base de données :  `gestionmissions`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `collaborateur`
+--
+
+CREATE TABLE IF NOT EXISTS `collaborateur` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user` varchar(25) COLLATE utf8_unicode_ci NOT NULL,
+  `nom` varchar(25) COLLATE utf8_unicode_ci NOT NULL,
+  `prenom` varchar(35) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `etat` varchar(25) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `UNIQ_770CBCD38D93D649` (`user`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=9 ;
+
+--
+-- Contenu de la table `collaborateur`
+--
+
+INSERT INTO `collaborateur` (`id`, `user`, `nom`, `prenom`, `email`, `etat`) VALUES
+(1, 'A618093', 'Seck', 'Ndèye Coumba', '	ndeye.coumba.sech@atos.net', ''),
+(2, 'A618082', 'Saware', 'Abdoulaye', 'saware@atos.net', ''),
+(3, 'A618080', 'Camara', 'Dame', 'dame@atos.net', ''),
+(4, 'A618083', 'Gueye', 'Maimouna', 'maimouna@atos.net', ''),
+(5, 'A618085', 'Ndiaye', 'Naby', 'naby@atos.net', ''),
+(6, 'A618089', 'Ka', 'Assane', 'assane@atos.net', ''),
+(7, 'A618087', 'Sow', 'Boubacar', 'boubacar@atos.net', ''),
+(8, 'A618086', 'Diallo', 'Mamadou Bobo', 'mamadoubobo@atos.net', '');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `dossiermissions`
+--
+
+CREATE TABLE IF NOT EXISTS `dossiermissions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `projet_id` int(11) DEFAULT NULL,
+  `collaborateur_id` int(11) DEFAULT NULL,
+  `candidature` varchar(25) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `dateDepart` datetime DEFAULT NULL,
+  `duree` int(11) DEFAULT NULL,
+  `ville` varchar(25) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `visa` varchar(25) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `hotel` varchar(25) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `chefProjet` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `fonction` varchar(60) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `IDX_735080F3C18272` (`projet_id`),
+  KEY `IDX_735080F3A848E3B1` (`collaborateur_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=12 ;
+
+--
+-- Contenu de la table `dossiermissions`
+--
+
+INSERT INTO `dossiermissions` (`id`, `projet_id`, `collaborateur_id`, `candidature`, `dateDepart`, `duree`, `ville`, `visa`, `hotel`, `chefProjet`, `fonction`) VALUES
+(2, 1, 1, 'oui', '2016-05-05 00:00:00', 3, 'Toulouse', NULL, 'Novotel', 'Michel Denisot', 'Design'),
+(5, 1, 3, 'oui', '2016-06-08 00:00:00', 3, 'Toulouse', NULL, NULL, NULL, NULL),
+(6, 3, 8, 'oui', '2016-04-08 00:00:00', 5, 'Bordeaux', NULL, NULL, NULL, NULL),
+(7, 3, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(10, 1, 4, 'oui', '2016-06-06 00:00:00', 4, NULL, NULL, NULL, NULL, NULL),
+(11, 1, 5, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `dossier_mission`
+--
+
+CREATE TABLE IF NOT EXISTS `dossier_mission` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `mission_id` int(11) NOT NULL,
+  `visa` varchar(25) COLLATE utf8_unicode_ci NOT NULL,
+  `hotel` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `vol` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `OM` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `IDX_D23D1B04BE6CAE90` (`mission_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `fos_user`
+--
+
+CREATE TABLE IF NOT EXISTS `fos_user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `username_canonical` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `email_canonical` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `enabled` tinyint(1) NOT NULL,
+  `salt` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `last_login` datetime DEFAULT NULL,
+  `locked` tinyint(1) NOT NULL,
+  `expired` tinyint(1) NOT NULL,
+  `expires_at` datetime DEFAULT NULL,
+  `confirmation_token` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `password_requested_at` datetime DEFAULT NULL,
+  `roles` longtext COLLATE utf8_unicode_ci NOT NULL COMMENT '(DC2Type:array)',
+  `credentials_expired` tinyint(1) NOT NULL,
+  `credentials_expire_at` datetime DEFAULT NULL,
+  `nom` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `prenom` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `tel` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `UNIQ_957A647992FC23A8` (`username_canonical`),
+  UNIQUE KEY `UNIQ_957A6479A0D96FBF` (`email_canonical`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=30 ;
+
+--
+-- Contenu de la table `fos_user`
+--
+
+INSERT INTO `fos_user` (`id`, `username`, `username_canonical`, `email`, `email_canonical`, `enabled`, `salt`, `password`, `last_login`, `locked`, `expired`, `expires_at`, `confirmation_token`, `password_requested_at`, `roles`, `credentials_expired`, `credentials_expire_at`, `nom`, `prenom`, `tel`) VALUES
+(1, 'A618091', 'a618091', 'bobo@atos.net', 'bobo@atos.net', 1, '333tol55oqgwgkks00wgc4wg848so4c', '$2y$13$9WBYAzBxHPRgI2zyJOZhxenbsgvcC56DT/GrZwkbtB8btIAoa6P5y', '2016-12-14 13:58:53', 0, 0, NULL, NULL, NULL, 'a:1:{i:0;s:8:"ROLE_ARH";}', 0, NULL, 'NDIAYE', 'Khadidjatou', '77'),
+(2, 'A618097', 'a618097', 'diandiallo@atos.net', 'diandiallo@atos.net', 1, 'obw5d1vu5uog8csgg8c84g8gkkwc04s', '$2y$13$.zEGw6P41IZK6b.la5aG3eOj0D4EEUrF69t7U71mU2il7iZP4SeDO', '2016-12-14 13:56:41', 0, 0, NULL, 'jBY_4OtpnKVTJtO_ZPCdg-HjCtUYB7XKbhfXFr4o49M', '2016-03-29 17:55:53', 'a:1:{i:0;s:10:"ROLE_COLAB";}', 0, NULL, 'Diallo', 'Mamadou Dian Alpha', '78 138 478 9'),
+(4, 'saware', 'saware', 'saware@gmail.com', 'saware@gmail.com', 1, '7m4u8xxiqfc4wsccc0ggw44c00k40ko', '$2y$13$nOIo.Gb6mZtNrVrA7i7xvupDcLHqNYNocAvQafQl3Ek90.7FkBwja', '2016-03-29 18:04:30', 0, 0, NULL, 'S2DtpwK9_TLKKAmEXIcFPiKHsXAupmyml3Jkhtgr5Z0', '2016-03-29 18:04:47', 'a:1:{i:0;s:8:"ROLE_DRH";}', 0, NULL, '', '', ''),
+(5, 'admin', 'admin', 'diallo@atos.net', 'diallo@atos.net', 1, 'ibzhw98xovcocckw8c80s0c4kgc8ogo', '$2y$13$2EEGiNGQUbkmP1Ot7hJEA.gDM8nnYyM3xZoctPYIBf67ZxLzUzCf2', '2016-04-18 14:19:39', 0, 0, NULL, NULL, NULL, 'a:1:{i:0;s:10:"ROLE_ADMIN";}', 0, NULL, 'Administrateur', 'GDC Atos Senegal', '77 88 87'),
+(9, 'A618095', 'a618095', 'coumba@gmail.com', 'coumba@gmail.com', 1, 'oqjy0wcxzjkowo44g4kwcssc4kkgsoc', '$2y$13$nqeH9plBbMqwXxtDbZm0/uuJzhVB51otytsksYnwuXW/x70nSSRGe', '2016-05-15 12:21:12', 0, 0, NULL, NULL, NULL, 'a:1:{i:0;s:7:"ROLE_DG";}', 0, NULL, 'GDC', 'Senegal', '777'),
+(11, 'A618082', 'a618082', 'saware@atos.net', 'saware@atos.net', 1, 'biz7slj7zlwgggsoswk08sc0okkw40g', '$2y$13$Tq6jPLvtPRgMvrYFAdtuLuxzftFzpj6got4/9/NRD5sEEgWBAkLV6', '2016-04-12 13:33:37', 0, 0, NULL, NULL, NULL, 'a:1:{i:0;s:10:"ROLE_COLAB";}', 0, NULL, 'Saware', 'Abdoulaye', '666'),
+(28, 'A618080', 'a618080', 'dame@atos.net', 'dame@atos.net', 1, 'qkfn24bc0c0o8oossoog4w0koc4sc80', '$2y$13$lZSgE5RaeVcoDTSSvdlkKugd.3e4iBR9iM43WwcAFDyTYEXsc4Gqm', '2016-05-09 18:35:53', 0, 0, NULL, NULL, NULL, 'a:1:{i:0;s:10:"ROLE_COLAB";}', 0, NULL, 'Camara', 'Dame', '555'),
+(29, 'entiteatos', 'entiteatos', 'atos@atos.net', 'atos@atos.net', 1, 'jdhaylok90oo0o0cgscks04g40woow4', '$2y$13$Il5EpemN0uDvOwNmxorRs.tTfNDrY4EYcKvuC5VmMGwGnLkimxW4O', '2016-05-13 13:27:03', 0, 0, NULL, NULL, NULL, 'a:1:{i:0;s:9:"ROLE_ATOS";}', 0, NULL, 'Atos', 'Project', '');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `frais`
+--
+
+CREATE TABLE IF NOT EXISTS `frais` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `collaborateur_id` int(11) NOT NULL,
+  `projet_id` int(11) NOT NULL,
+  `designation` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `montant` decimal(10,0) NOT NULL,
+  `piece` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `date` datetime NOT NULL,
+  `infoCom` longtext COLLATE utf8_unicode_ci,
+  `etat` varchar(7) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `unite` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `IDX_25404C98A848E3B1` (`collaborateur_id`),
+  KEY `IDX_25404C98C18272` (`projet_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=16 ;
+
+--
+-- Contenu de la table `frais`
+--
+
+INSERT INTO `frais` (`id`, `collaborateur_id`, `projet_id`, `designation`, `montant`, `piece`, `date`, `infoCom`, `etat`, `unite`) VALUES
+(5, 1, 1, 'Taxi', '22', 'f9d20b76199a43b70e222b7644357bf8.png', '2016-05-05 00:00:00', 'Déplacement sur Paris', 'oui', 'euro'),
+(11, 7, 1, 'Ordonance', '100', 'fe3cd8ced8181e16489b50438cc683c1.png', '2016-05-06 00:00:00', 'Visite medicale', 'oui', 'XFO'),
+(12, 3, 3, 'rgf', '456', '247757652fdbfd81bdadbc5be0c4b3a0.png', '2016-05-14 00:00:00', NULL, 'oui', ''),
+(13, 2, 3, 'lodame', '666', '5367867694f13500f1573970fd8eadd6.png', '2016-05-07 00:00:00', 'qerfsdfr', 'oui', ''),
+(14, 1, 2, 'Metro', '250', '1e162f7e24a944110471b7c77d5a4975.png', '2016-05-14 00:00:00', NULL, 'oui', ''),
+(15, 4, 1, 'Taxi', '15', '47f5395c48a0874eb1178959898c0908.png', '2016-06-03 00:00:00', 'Déplacement pour conférence', NULL, 'euro');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `mission`
+--
+
+CREATE TABLE IF NOT EXISTS `mission` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `dateDebut` datetime NOT NULL,
+  `dateFin` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `mission_projet`
+--
+
+CREATE TABLE IF NOT EXISTS `mission_projet` (
+  `mission_id` int(11) NOT NULL,
+  `projet_id` int(11) NOT NULL,
+  PRIMARY KEY (`mission_id`,`projet_id`),
+  KEY `IDX_8ED46E7BE6CAE90` (`mission_id`),
+  KEY `IDX_8ED46E7C18272` (`projet_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `projet`
+--
+
+CREATE TABLE IF NOT EXISTS `projet` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `reference` varchar(25) COLLATE utf8_unicode_ci NOT NULL,
+  `intitule` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `datePublication` datetime NOT NULL,
+  `annonceur` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `duree` int(11) NOT NULL,
+  `lieu` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `profil` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `description` longtext COLLATE utf8_unicode_ci,
+  `etat` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `UNIQ_50159CA9AEA34913` (`reference`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=21 ;
+
+--
+-- Contenu de la table `projet`
+--
+
+INSERT INTO `projet` (`id`, `reference`, `intitule`, `datePublication`, `annonceur`, `duree`, `lieu`, `profil`, `description`, `etat`) VALUES
+(1, 'P0001', 'Intramiss', '2016-04-18 12:22:24', 'Atos France', 6, 'Toulouse', 'Ingénieur', 'Pilotage automatique', 'En cours de traitement'),
+(2, 'P0002', 'Projet Sage', '2016-04-18 12:23:53', 'Atos France', 5, 'Paris', 'Developpeur', 'stationnement automatique', NULL),
+(3, 'P0003', 'Budgétisation', '2016-04-18 12:25:04', 'Atos USA', 7, 'Rabat', 'Developpeur', 'Équipage automatique', 'En cours de traitement'),
+(4, 'P0004', 'Plateforme candidature', '2016-04-20 15:44:44', 'Atos Maroc', 3, 'Bordeaux', 'Ingénieur', 'Mise en place d''un guichet automatique au stade de la ville', NULL),
+(5, 'P0005', 'Docker', '2016-04-20 17:25:40', 'Atos France', 2, 'Nantes', 'Developpeur', NULL, 'En cours de traitement'),
+(19, 'P0006', 'Développement module de paiement GIM', '2016-05-13 10:51:13', 'Atos France', 3, 'Toulouse', 'SAP', 'Une camera', NULL),
+(20, 'P0007', 'RDF', '2016-05-13 10:51:13', 'Atos Maroc', 5, 'Rabat', 'Oracle', 'Statistique', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `projet_collaborateur`
+--
+
+CREATE TABLE IF NOT EXISTS `projet_collaborateur` (
+  `projet_id` int(11) NOT NULL,
+  `collaborateur_id` int(11) NOT NULL,
+  PRIMARY KEY (`projet_id`,`collaborateur_id`),
+  KEY `IDX_5ACFE979C18272` (`projet_id`),
+  KEY `IDX_5ACFE979A848E3B1` (`collaborateur_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Contenu de la table `projet_collaborateur`
+--
+
+INSERT INTO `projet_collaborateur` (`projet_id`, `collaborateur_id`) VALUES
+(1, 1),
+(1, 3),
+(1, 4),
+(1, 5),
+(3, 2),
+(3, 8);
+
+--
+-- Contraintes pour les tables exportées
+--
+
+--
+-- Contraintes pour la table `dossiermissions`
+--
+ALTER TABLE `dossiermissions`
+  ADD CONSTRAINT `FK_735080F3A848E3B1` FOREIGN KEY (`collaborateur_id`) REFERENCES `collaborateur` (`id`),
+  ADD CONSTRAINT `FK_735080F3C18272` FOREIGN KEY (`projet_id`) REFERENCES `projet` (`id`);
+
+--
+-- Contraintes pour la table `dossier_mission`
+--
+ALTER TABLE `dossier_mission`
+  ADD CONSTRAINT `FK_D23D1B04BE6CAE90` FOREIGN KEY (`mission_id`) REFERENCES `mission` (`id`);
+
+--
+-- Contraintes pour la table `frais`
+--
+ALTER TABLE `frais`
+  ADD CONSTRAINT `FK_25404C98A848E3B1` FOREIGN KEY (`collaborateur_id`) REFERENCES `collaborateur` (`id`),
+  ADD CONSTRAINT `FK_25404C98C18272` FOREIGN KEY (`projet_id`) REFERENCES `projet` (`id`);
+
+--
+-- Contraintes pour la table `mission_projet`
+--
+ALTER TABLE `mission_projet`
+  ADD CONSTRAINT `FK_8ED46E7BE6CAE90` FOREIGN KEY (`mission_id`) REFERENCES `mission` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `FK_8ED46E7C18272` FOREIGN KEY (`projet_id`) REFERENCES `projet` (`id`) ON DELETE CASCADE;
+
+--
+-- Contraintes pour la table `projet_collaborateur`
+--
+ALTER TABLE `projet_collaborateur`
+  ADD CONSTRAINT `FK_5ACFE979A848E3B1` FOREIGN KEY (`collaborateur_id`) REFERENCES `collaborateur` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `FK_5ACFE979C18272` FOREIGN KEY (`projet_id`) REFERENCES `projet` (`id`) ON DELETE CASCADE;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
